@@ -33,16 +33,17 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/firstContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:background="@drawable/round_corner_bg"
+        android:background="@drawable/round_corner_bg_light"
         android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -73,17 +74,18 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/themeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@android:color/white"
+        android:background="@color/whiteTheme"
         android:orientation="horizontal"
         android:paddingStart="10dp"
         android:paddingEnd="10dp">
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/dummySwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -91,21 +93,24 @@
             android:textAlignment="textStart" />
 
         <ToggleButton
-            android:id="@+id/toggleButton"
+            android:id="@+id/themeChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:checked="false"
             android:textAllCaps="true"
             android:textOff="Claro"
             android:textOn="Oscuro" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/moneyContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#82FFFFFF"
+        android:background="@color/darkTheme"
+        android:backgroundTint="@color/tint_light"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -120,7 +125,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/numToConvert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -140,13 +145,13 @@
                 android:layout_weight="1">
 
                 <RadioButton
-                    android:id="@+id/radioButton4"
+                    android:id="@+id/dollarsButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Convertir a dólares" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/eurosButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Convertir a euros" />
@@ -166,7 +171,7 @@
                     android:text="Resultado" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/convertedMoney"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingEnd="50dp"
@@ -183,7 +188,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/conversionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -191,7 +196,7 @@
                 android:textAllCaps="true" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/resetButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
