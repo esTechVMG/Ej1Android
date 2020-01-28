@@ -60,7 +60,8 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="#C62828"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/modnum"

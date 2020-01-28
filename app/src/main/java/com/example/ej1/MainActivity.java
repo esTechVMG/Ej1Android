@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -18,13 +19,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int darkColor,lightColor,lightTint,darkTint;
     private LinearLayout[] layouts=new LinearLayout[2];
     private TextView resultText;
+    private Switch aSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //INIT
-
+        aSwitch=findViewById(R.id.dummySwitch);
         resultText=findViewById(R.id.result);
         layouts[0]=findViewById(R.id.firstContainer);
         layouts[1]=findViewById(R.id.themeContainer);
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plus.setOnClickListener(this);
         modNumber.setOnClickListener(this);
         theme.setOnClickListener(this);
-        getResources().getColor(R.color.whiteTheme);
+        aSwitch.setOnClickListener(this);
 
     }
     private int actualNum=0;
@@ -67,22 +69,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-    public void setTheme(int textColor,int backColor,int tintColor,int hintColor,int drawBG){
+    public void setTheme(int textColor,int backColor,int tintColor,int hintColor,int drawBG){//THIS UPDATES THE COLORS OF THE ELEMENTS
         colorButtonUpdate(plus,textColor,backColor);
         colorButtonUpdate(minus,textColor,backColor);
         resultText.setTextColor(textColor);
         modNumber.setTextColor(textColor);
         modNumber.setHintTextColor(hintColor);
         layouts[1].setBackgroundColor(backColor);
-        theme.setTextColor(textColor);
+        //STORE PADDING VALUES BECAUSE setBackgroundResource() RESETS IT TO 0
         int pL = layouts[0].getPaddingLeft();
         int pT = layouts[0].getPaddingTop();
         int pR = layouts[0].getPaddingRight();
         int pB = layouts[0].getPaddingBottom();
         layouts[0].setBackgroundResource(drawBG);
         layouts[0].setPadding(pL,pT,pR,pB);
+        aSwitch.setTextColor(textColor);
     }
-    public void colorButtonUpdate(Button b,int textColor,int backColor){
+    public void colorButtonUpdate(Button b,int textColor,int backColor){//SPECIFIC BUTTON THEME UPDATE
         b.setTextColor(textColor);
         b.getBackground().setTint(backColor);
     }
@@ -100,6 +103,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.themeChoose:
                 updateTheme();
+                break;
+            case R.id.dummySwitch:
+                toggleOutputVisibility();
+                break;
         }
+    }
+    public void toggleOutputVisibility(){
+        if(output1.getVisibility()==View.VISIBLE){
+            output1.setVisibility(View.INVISIBLE);
+        }else{
+            output1.setVisibility(View.VISIBLE);
+        }
+
     }
 }
