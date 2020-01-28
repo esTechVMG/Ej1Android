@@ -133,7 +133,7 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="Valor a convertir"
-            android:inputType="number" />
+            android:inputType="number|numberDecimal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,6 +141,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
+                android:id="@+id/convertTypeGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -176,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingEnd="50dp"
-                    android:text="0€"
+                    android:text="0"
                     android:textAlignment="textEnd"
                     android:textColor="#AD1457"
                     android:textSize="18sp" />

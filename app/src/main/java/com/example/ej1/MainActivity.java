@@ -6,26 +6,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button plus;
-    private  Button minus;
-    private TextView output1;
-    private EditText modNumber;
+    private Button plus,minus,convert,reset;
+    private TextView output1,resultText,output2;
+    private EditText modNumber,modPrice;
     private ToggleButton theme;
     private int darkColor,lightColor,lightTint,darkTint;
     private LinearLayout[] layouts=new LinearLayout[2];
-    private TextView resultText;
     private Switch aSwitch;
+    private RadioGroup convertGroup;
+    private RadioButton dollar,euros;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //INIT
+        output2=findViewById(R.id.convertedMoney);
+        dollar=findViewById(R.id.dollarsButton);
+        euros=findViewById(R.id.eurosButton);
+        reset=findViewById(R.id.resetButton);
+        modPrice=findViewById(R.id.numToConvert);
+        convertGroup=findViewById(R.id.convertTypeGroup);
+        convert=findViewById(R.id.conversionButton);
         aSwitch=findViewById(R.id.dummySwitch);
         resultText=findViewById(R.id.result);
         layouts[0]=findViewById(R.id.firstContainer);
@@ -40,11 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         output1 = findViewById(R.id.outputnumber1);
         modNumber = findViewById(R.id.modnum);
         //CONFIG CLICKS
+        convert.setOnClickListener(this);
+        reset.setOnClickListener(this);
         minus.setOnClickListener(this);
         plus.setOnClickListener(this);
         modNumber.setOnClickListener(this);
         theme.setOnClickListener(this);
         aSwitch.setOnClickListener(this);
+
+
 
     }
     private int actualNum=0;
@@ -107,7 +122,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.dummySwitch:
                 toggleOutputVisibility();
                 break;
+            case R.id.conversionButton:
+                convertMoney();
+                break;
+            case R.id.resetButton:
+                dollar.setChecked(false);
+                euros.setChecked(false);
+                modPrice.setText("");
+                displayToast("Restablecidas las opciones");
+                break;
         }
+    }
+    public void displayToast(String text){
+        Toast toast=Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+    }
+    public void convertMoney(){
+        float value=1.10f;
+        String priceString=modPrice.getText().toString();
+        if(priceString.isEmpty()){
+            displayToast("Introduzca un valor");
+        }else{
+            double priceDouble=Double.valueOf(priceString);
+            switch (convertGroup.getCheckedRadioButtonId()){
+                case R.id.dollarsButton:
+                    output2.setText(String.format("%.2f", priceDouble*value) + "$");
+                    break;
+                case R.id.eurosButton:
+                    output2.setText(String.format("%.2f", priceDouble/value) + "€");
+                    break;
+                default://UNSELECTED RADIO BUTTON
+                    displayToast("Seleccione una opcion");
+                    break;
+            }
+        }
+
     }
     public void toggleOutputVisibility(){
         if(output1.getVisibility()==View.VISIBLE){
